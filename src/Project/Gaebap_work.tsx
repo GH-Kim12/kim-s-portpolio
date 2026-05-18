@@ -15,7 +15,7 @@ interface ProjectData {
 // 2. 프로젝트 데이터 (기술 스택 및 핵심 기능)
 const projects: ProjectData[] = [
   {
-    title: "똑똑 APP",
+    title: "똑똑 APP: 핵심기능",
     techStack: ["Python", "Flet", "PostgreSQL", "SQLAlchemy", "XGBoost"],
     features: [
       {
@@ -37,7 +37,7 @@ const projects: ProjectData[] = [
     ],
   },
   {
-    title: "개밥개밥 ERP",
+    title: "개밥개밥 ERP: 핵심기능",
     techStack: ["Python", "Flet", "PostgreSQL", "SQLAlchemy"],
     features: [
       {
