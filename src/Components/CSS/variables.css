@@ -1,0 +1,93 @@
+/* 이곳에서 전반적인 색깔 지정 등을 담당하는 구간
+   구간을 정의하고 -> import 하는 방식을 사용함. */
+:root {
+  --main-bg-color: #f8f9fa; /* 전체 배경색 */
+  --primary-color: #2d3436; /* 메인 테마 색상 */
+  --accent-color: #0984e3; /* 포인트 색상 */
+  --text-color: #2d3436; /* 기본 글자색 */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 배경 색 적옹 */
+body {
+  margin: 0; /* 외부 간격 */
+  padding: 0; /* 내부 간격 */
+  background-color: var(--main-bg-color); /* 배경 색 */
+  color: var(--text-color); /* 글자 색 */
+  font-family: "Pretendard", sans-serif; /* 글꼴 */
+}
+
+/*=========================== prfile css ===========================*/
+.profile-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh; /* height 대신 min-height 사용 */
+  background-color: #fff;
+}
+
+.profile-image-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+}
+
+.image-frame {
+  width: 300px; /* 이미지 크기 고정 */
+  height: 400px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.profile-text-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5%;
+}
+
+.about-me-title {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #000;
+  align-self: flex-start;
+}
+
+/* 모바일 대응 (반응형) */
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+  }
+  .image-frame {
+    width: 200px;
+    height: 250px;
+    margin-top: 50px;
+  }
+}
+
+/* Gaebap css */
+/* CSS 예시 */
+@media (max-width: 768px) {
+  .project-gallery {
+    display: flex !important; /* 그리드 해제 */
+    overflow-x: scroll; /* 가로 스크롤 허용 */
+    padding-bottom: 20px;
+    gap: 15px;
+  }
+  .img-card {
+    flex: 0 0 70%; /* 카드 너비를 화면의 70% 정도로 고정 */
+  }
+}
