@@ -25,7 +25,7 @@ function App() {
     setTimeout(async () => {
       try {
         const pdf = new jsPDF("l", "mm", "a4");
-        const imgWidth = 297;
+        const pdfWidth = 297;
         const pageHeight = 210;
 
         const sections = Array.from(element.children) as HTMLDivElement[];
@@ -33,22 +33,54 @@ function App() {
         for (let i = 0; i < sections.length; i++) {
           const section = sections[i];
 
-          // 고정된 가로폭(A4 가로 비율에 맞춘 1414px)을 시뮬레이션하여 캡처
           const canvas = await html2canvas(section, {
             scale: 2,
             useCORS: true,
             ignoreElements: (el) => el.tagName === "VIDEO",
             logging: false,
             windowWidth: 1414,
+            onclone: (clonedDocument) => {
+              const clonedElement = clonedDocument.getElementById(section.id);
+              if (clonedElement) {
+                clonedElement.style.width = "1414px";
+                clonedElement.style.minWidth = "1414px";
+              }
+            },
           });
 
           const imgData = canvas.toDataURL("image/jpeg", 0.9);
+          const imgProps = pdf.getImageProperties(imgData);
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
           if (i > 0) {
             pdf.addPage();
           }
 
-          pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, pageHeight);
+          // [핵심 해결 로직]
+          // 내용이 A4 한 장 높이(210)를 살짝 초과할 경우 (약 1.3배 이하),
+          // 두 장으로 무식하게 자르지 않고 한 장에 쏙 들어가게 전체 비율을 축소합니다.
+          if (pdfHeight > pageHeight && pdfHeight < pageHeight * 1.3) {
+            const scaleRatio = pageHeight / pdfHeight;
+            const renderWidth = pdfWidth * scaleRatio;
+            const xOffset = (pdfWidth - renderWidth) / 2; // 비율 축소 후 가로 중앙 정렬
+
+            pdf.addImage(imgData, "JPEG", xOffset, 0, renderWidth, pageHeight);
+          }
+          // Project나 Gaebap처럼 길이가 매우 긴 섹션은 어쩔 수 없이 기존처럼 여러 장으로 잘라서 출력합니다.
+          else {
+            let heightLeft = pdfHeight;
+            let position = 0;
+
+            pdf.addImage(imgData, "JPEG", 0, position, pdfWidth, pdfHeight);
+            heightLeft -= pageHeight;
+
+            while (heightLeft > 0) {
+              position = heightLeft - pdfHeight;
+              pdf.addPage();
+              pdf.addImage(imgData, "JPEG", 0, position, pdfWidth, pdfHeight);
+              heightLeft -= pageHeight;
+            }
+          }
         }
 
         pdf.save("portfolio_김건형.pdf");
@@ -66,7 +98,17 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        backgroundColor: "#fff",
+        margin: "0 auto" /* 모바일 대화면 등에서 언제나 중앙 정렬 보장 */,
+        overflowX:
+          "hidden" /* 가로 스크롤바가 생겨서 우측으로 튕기는 현상 원천 차단 */,
+      }}
+    >
       <Header onDownload={handleDownloadPDF} />
 
       {isDownloading && (

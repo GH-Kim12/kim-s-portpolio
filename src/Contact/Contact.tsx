@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from "lucide-react"; // 아이콘 라이브러리 사용 가정
+import { Mail, MapPin, Phone } from "lucide-react";
 import React from "react";
 import { SiGithub } from "react-icons/si";
 
@@ -24,7 +24,7 @@ const ContactSection: React.FC = () => {
       style={{
         backgroundColor: "#051d3b",
         color: "white",
-        padding: "40px 20px",
+        padding: "60px 40px",
         fontFamily: "sans-serif",
       }}
     >
@@ -32,38 +32,67 @@ const ContactSection: React.FC = () => {
         style={{
           fontSize: "24px",
           fontWeight: "bold",
-          marginBottom: "30px",
+          marginBottom: "40px",
           textTransform: "uppercase",
+          letterSpacing: "1px",
+          textAlign: "center", // 중앙 정렬로 시각적 균형 확보
         }}
       >
         Contact Information
       </h2>
 
-      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+      {/* 
+        반응형 조치: display: "flex"와 flexWrap: "wrap"을 활용하여 
+        공간이 부족한 모바일에서는 자동으로 아래로 떨어지게 설정 
+      */}
+      <ul
+        style={{
+          listStyle: "none",
+          padding: 0,
+          margin: "0 auto",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "30px 40px", // 세로 간격 30px, 가로 간격 40px
+          maxWidth: "1200px",
+        }}
+      >
         {contactData.map((item, index) => (
           <li
             key={index}
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "15px",
-              marginBottom: "20px",
-              fontSize: "18px",
+              gap: "12px",
+              fontSize: "16px",
+              // 데스크톱 1414px 및 PDF 출력 시 가로 정렬을 유지하기 위한 최소 너비 설정
+              // 모바일에서는 flexWrap에 의해 한 줄에 하나씩 떨어짐
+              flex: "1 1 250px",
+              maxWidth: "320px",
+              justifyContent: "flex-start",
+              padding: "10px",
             }}
           >
-            <span style={{ opacity: 0.8 }}>{item.icon}</span>
-            {/* 링크가 있는 경우와 없는 경우를 구분하여 출력합니다. */}
+            <span
+              style={{ opacity: 0.8, display: "flex", alignItems: "center" }}
+            >
+              {item.icon}
+            </span>
             {item.link ? (
               <a
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "white", textDecoration: "none" }}
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  wordBreak: "break-all", // 링크가 길어 화면을 벗어나는 것 방지
+                }}
               >
                 {item.text}
               </a>
             ) : (
-              <span>{item.text}</span>
+              <span style={{ wordBreak: "break-all" }}>{item.text}</span>
             )}
           </li>
         ))}

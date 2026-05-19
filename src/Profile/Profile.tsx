@@ -1,10 +1,36 @@
 import "../Components/CSS/variables.css";
 
 const Profile = () => {
+  const certificates = [
+    {
+      date: "2025.01",
+      name: "워드프로세서",
+      grade: "1급",
+      authority: "대한상공회의소",
+    },
+    {
+      date: "2024.12",
+      name: "지게차운전기능사",
+      grade: "-",
+      authority: "한국산업인력공단",
+    },
+    {
+      date: "2023.10",
+      name: "K-Tour Idea Challenge",
+      grade: "장려상",
+      authority: "한국교통대학교",
+    },
+    { date: "2022.01", name: "2종보통면허", grade: "-", authority: "경찰청" },
+    {
+      date: "2021.10",
+      name: "한국사능력검정시험",
+      grade: "1급",
+      authority: "국사편찬위원회",
+    },
+  ];
+
   return (
     <section className="profile-container">
-      {" "}
-      {/* 인라인 스타일 대신 클래스 사용 */}
       {/* 좌측: 이미지 영역 */}
       <div className="profile-image-area">
         <div className="image-frame">
@@ -15,6 +41,7 @@ const Profile = () => {
           />
         </div>
       </div>
+
       {/* 우측: 텍스트 영역 */}
       <div className="profile-text-area">
         <h2 className="about-me-title">About Me</h2>
@@ -27,8 +54,10 @@ const Profile = () => {
           <p style={{ marginTop: "20px" }}>
             KOSMO의{" "}
             <strong>"생성형 AI & 클라우드 서비스 개발 전문가 과정"</strong>을
-            이수하였으며, 프로젝트에서는 Python의 <strong>Flet</strong>
-            라이브러리를 활용해 Frontend와 Backend를 구현하였습니다.
+            이수하였으며, 프로젝트에서 Python의 <strong>Flet</strong>{" "}
+            프레임워크로 프론트엔드와 백엔드를 통합 구현하고,{" "}
+            <strong>PostgreSQL</strong>과 <strong>SQLAlchemy</strong>를 활용해
+            데이터베이스를 구축하였습니다.
           </p>
 
           <div className="experience-skills-container">
@@ -71,6 +100,32 @@ const Profile = () => {
                   <strong> DevOps:</strong> AWS, Vercel 등
                 </li>
               </ul>
+            </div>
+          </div>
+
+          <div className="certifications-section">
+            <h3>Certificates</h3>
+            <div className="table-responsive">
+              <table className="cert-table">
+                <thead>
+                  <tr>
+                    <th>취득일</th>
+                    <th>자격증명</th>
+                    <th>종목/등급</th>
+                    <th>주관부처</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {certificates.map((cert, index) => (
+                    <tr key={index}>
+                      <td>{cert.date}</td>
+                      <td className="text-left font-bold">{cert.name}</td>
+                      <td>{cert.grade}</td>
+                      <td>{cert.authority}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
