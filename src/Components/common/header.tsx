@@ -5,17 +5,17 @@ interface HeaderProps {
 }
 
 const Header = ({ onDownload }: HeaderProps) => {
+  // 1. 기존 [isMenuOpen, setIsMenuOpen] 상태만 남기고, 미사용 변수인 isMobile 제거
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth <= 768;
-      setIsMobile(mobile);
+      // 2. 내부에서 isMobile 상태를 업데이트하던 로직을 지우고 창 너비 변화에 따른 햄버거 메뉴 닫기 기능만 유지
       if (!mobile) setIsMenuOpen(false);
     };
 
-    handleResize();
+    handleResize(); // 초기 실행
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
