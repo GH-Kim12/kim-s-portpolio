@@ -1,21 +1,17 @@
 import { useEffect, useState } from "react";
+// 💡 철자 일관성을 위해 변수명을 portfolioPDF로 관리하는 것을 추천합니다.
+import portpolioPDF from "../assets/kim_portpolio.pdf";
 
-interface HeaderProps {
-  onDownload: () => void;
-}
-
-const Header = ({ onDownload }: HeaderProps) => {
-  // 1. 기존 [isMenuOpen, setIsMenuOpen] 상태만 남기고, 미사용 변수인 isMobile 제거
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth <= 768;
-      // 2. 내부에서 isMobile 상태를 업데이트하던 로직을 지우고 창 너비 변화에 따른 햄버거 메뉴 닫기 기능만 유지
       if (!mobile) setIsMenuOpen(false);
     };
 
-    handleResize(); // 초기 실행
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -30,9 +26,6 @@ const Header = ({ onDownload }: HeaderProps) => {
 
   return (
     <>
-      {/* html2canvas(PDF 출력)와 일반 브라우저 환경을 동시에 대응하기 위한 반응형 스타일 시트 주입.
-        인라인 스타일의 한계를 CSS 클래스로 보완합니다.
-      */}
       <style>{`
         .nav-menu {
           display: flex;
@@ -41,7 +34,6 @@ const Header = ({ onDownload }: HeaderProps) => {
           transition: transform 0.3s ease-in-out;
         }
 
-        /* 일반 모바일 브라우저 환경에서의 메뉴 스타일 */
         @media (max-width: 768px) {
           .nav-menu {
             position: fixed;
@@ -58,14 +50,17 @@ const Header = ({ onDownload }: HeaderProps) => {
           }
           .nav-button {
             font-size: 1.2rem !important;
-            padding: !important 15px 0;
+            padding: 15px 0 !important;
             width: 100% !important;
             text-align: center !important;
             color: #000 !important;
           }
-          .download-button {
+          .download-link {
             width: 80% !important;
             margin-top: 20px !important;
+          }
+          .download-button {
+            width: 100% !important;
           }
           .hamburger-btn {
             display: flex !important;
@@ -104,7 +99,6 @@ const Header = ({ onDownload }: HeaderProps) => {
           포트폴리오-김건형
         </div>
 
-        {/* 미디어 쿼리 클래스(.nav-menu) 제어로 웹 화면과 PDF 가상 돔 화면을 모두 수용 */}
         <nav className="nav-menu">
           <button
             className="nav-button"
@@ -163,33 +157,38 @@ const Header = ({ onDownload }: HeaderProps) => {
             Contact
           </button>
 
-          <button
-            className="nav-button download-button"
-            style={{
-              cursor: "pointer",
-              fontWeight: "bold",
-              border: "none",
-              backgroundColor: "#6A5ACD",
-              color: "#fff",
-              padding: "8px 16px",
-              borderRadius: "5px",
-              fontSize: "0.95rem",
-            }}
-            onClick={() => {
-              onDownload();
-              setIsMenuOpen(false);
-            }}
+          {/* ★ 수정: 쉼표 오타를 제거하고 변수를 href에 바인딩 */}
+          <a
+            href={portpolioPDF}
+            download="포트폴리오_김건형.pdf"
+            className="download-link"
+            style={{ textDecoration: "none" }}
+            onClick={() => setIsMenuOpen(false)}
           >
-            PDF 다운로드 📥
-          </button>
+            <button
+              className="nav-button download-button"
+              style={{
+                cursor: "pointer",
+                fontWeight: "bold",
+                border: "none",
+                backgroundColor: "#6A5ACD",
+                color: "#fff",
+                padding: "8px 16px",
+                borderRadius: "5px",
+                fontSize: "0.95rem",
+                width: "auto",
+              }}
+            >
+              PDF 다운로드 📥
+            </button>
+          </a>
         </nav>
 
-        {/* 모바일 토글 햄버거 버튼 */}
         <button
           className="hamburger-btn"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           style={{
-            display: "none", // 데스크톱 및 PDF 렌더링 시에는 원천 배제
+            display: "none",
             background: "transparent",
             border: "none",
             fontSize: "1.6rem",
@@ -199,7 +198,7 @@ const Header = ({ onDownload }: HeaderProps) => {
             height: "30px",
             alignItems: "center",
             justifyContent: "center",
-            zIndex:1001,
+            zIndex: 1001,
           }}
         >
           {isMenuOpen ? "✕" : "☰"}

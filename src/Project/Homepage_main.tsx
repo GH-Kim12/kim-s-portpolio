@@ -16,8 +16,7 @@ const projects: ProjectItem[] = [
   {
     id: "homepage",
     title: "아티스트 홈페이지제작",
-    description:
-      "의뢰를 받아 아티스트 홈페이지를 작성하였으며, Vercel를 이용해 배포 또한 진행하였음.(개인 프로젝트)",
+    description: "제작목적: 개인 프로젝트로 Vercel를 이용해 배포 또한 진행.",
     period: "2026.03 - 2026.04 (약 4주)",
     details:
       "사용자의 질문에 AI가 최적화된 답변을 제공합니다. 비동기 처리를 통해 응답 대기 시간을 최적화하고 직관적인 인터페이스를 구현했습니다.",

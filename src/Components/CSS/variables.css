@@ -32,7 +32,7 @@ body {
 }
 
 /* ==========================================================================
-   데스크톱 기본 스타일 (A4 가로 1414px 및 대화면 기준)
+   데스크톱 기본 스타일 (Profile & Project & Gaebap)
    ========================================================================== */
 
 /* Profile Section */
@@ -41,17 +41,15 @@ body {
   width: 100%;
   min-height: 100vh;
   background-color: #ffffff;
-  /* 상단 네비게이션바가 본문을 가리지 않도록 상단 패딩을 120px로 확장 */
   padding: 120px 5% 80px;
   gap: 50px;
-  align-items: flex-start; /* 테이블이 길어질 수 있으므로 위쪽 정렬로 변경 */
+  align-items: flex-start; /* 테이블이 길어질 수 있으므로 위쪽 정렬 */
 }
 
 .profile-image-area {
   flex: 1;
   display: flex;
   justify-content: center;
-  /* 스크롤 시 이미지가 따라오도록 고정 (선택사항, 원치 않으면 제거) */
   position: sticky;
   top: 120px;
 }
@@ -68,10 +66,11 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
 }
 
 .profile-text-area {
-  flex: 1.8; /* 텍스트 영역 비율 약간 확대 */
+  flex: 1.8;
   display: flex;
   flex-direction: column;
 }
@@ -81,6 +80,8 @@ body {
   font-weight: bold;
   margin-bottom: 30px;
   position: relative;
+  border-bottom: 2px solid #000;
+  align-self: flex-start;
 }
 
 .profile-description {
@@ -100,7 +101,6 @@ body {
   flex: 1;
 }
 
-/* ★ 핵심 수정: h3 태그 밑줄 일관화 및 Certificates h3 추가 */
 .experience-section h3,
 .skills-section h3,
 .certifications-section h3 {
@@ -110,7 +110,7 @@ body {
   margin-bottom: 15px;
   color: #051d3b;
   font-weight: bold;
-  display: inline-block; /* 선 길이가 글자 길이에 딱 맞게 생성되도록 제한 */
+  display: inline-block;
 }
 
 .experience-list,
@@ -132,7 +132,7 @@ body {
   margin-left: 8px;
 }
 
-/* ★ 추가: 자격사항 테이블 상세 스타일 복구 */
+/* Certifications */
 .certifications-section {
   margin-top: 30px;
   width: 100%;
@@ -149,7 +149,7 @@ body {
   margin-top: 10px;
   font-size: 0.95rem;
   text-align: center;
-  border-bottom: 2px solid #bce1f1; /* 테이블 하단을 닫아주는 두꺼운 선 */
+  border-bottom: 2px solid #bce1f1;
 }
 
 .cert-table th {
@@ -178,166 +178,7 @@ body {
   padding-left: 15px !important;
 }
 
-/* ==========================================================================
-   모바일 전용 반응형 레이아웃 (화면 너비 768px 이하 대응)
-   ========================================================================== */
-@media (max-width: 768px) {
-  /* Profile 모바일 변경 */
-  .profile-container {
-    flex-direction: column;
-    padding: 90px 20px 60px 20px;
-    gap: 30px;
-  }
-
-  .profile-image-area {
-    position: static;
-    width: 100%;
-  }
-
-  .image-frame {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-  }
-
-  .profile-text-area {
-    width: 100%;
-  }
-
-  .about-me-title {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .profile-description {
-    font-size: 1rem;
-    text-align: left;
-  }
-
-  .experience-skills-container {
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 30px;
-  }
-
-  /* 모바일 테이블 글자 크기 최적화 */
-  .cert-table {
-    font-size: 0.85rem;
-  }
-
-  .cert-table th,
-  .cert-table td {
-    padding: 8px 5px;
-  }
-
-  /* Project 모바일 갤러리 가로 스크롤 적용 */
-  .project-gallery {
-    display: flex !important; /* 인라인 grid 무력화 */
-    overflow-x: auto;
-    padding-bottom: 20px;
-    gap: 15px;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .img-card {
-    flex: 0 0 80%; /* 모바일에서 카드가 잘 보이도록 크기 확보 */
-  }
-}
-
-/* ==========================================================================
-   PDF 인쇄 및 내보내기 전용 스타일 (@media print)
-   ========================================================================== */
-@media print {
-  /* 1. 기기 환경 상관없이 강제로 데스크톱 레이아웃 폭 주입 */
-  html,
-  body {
-    width: 1200px !important;
-    min-width: 1200px !important;
-    background-color: #fff !important;
-    overflow: visible !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  /* 2. PDF에 찍히지 않아야 할 헤더 UI 제거 */
-  .header-container,
-  .hamburger-btn,
-  .nav-menu {
-    display: none !important;
-  }
-
-  /* 3. 모바일 상태여도 데스크톱 가로 구조 복구 */
-  .profile-container {
-    flex-direction: row !important;
-    min-height: auto !important;
-    padding: 40px !important;
-    gap: 50px !important;
-  }
-
-  .profile-image-area {
-    position: static !important;
-  }
-
-  .experience-skills-container {
-    flex-direction: row !important;
-    gap: 40px !important;
-  }
-
-  .project-gallery {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important; /* 2열 고정 */
-    gap: 25px !important;
-    overflow-x: visible !important;
-  }
-
-  .img-card {
-    flex: none !important;
-    width: 100% !important;
-  }
-
-  /* 4. 핵심 요청: Contact 섹션을 얇은 Footer 형태로 하단 배치 */
-  #contact {
-    page-break-inside: avoid !important; /* 페이지 끊김 방지 */
-    margin-top: auto !important;
-    padding: 20px 0 !important;
-    background-color: #fff !important;
-    border-top: 1px solid #eee !important;
-    width: 100% !important;
-  }
-
-  .contact-container {
-    display: flex !important;
-    flex-direction: row !important; /* 가로 일렬 배치 */
-    justify-content: space-between !important;
-    align-items: center !important;
-    width: 85% !important;
-    margin: 0 auto !important;
-  }
-
-  .contact-title {
-    font-size: 1.2rem !important; /* 타이틀 크기를 슬림하게 */
-    margin-bottom: 0 !important;
-    color: #333 !important;
-  }
-
-  .contact-info-text {
-    font-size: 0.9rem !important;
-    color: #666 !important;
-    text-align: right !important;
-    display: flex !important;
-    gap: 20px !important; /* 가로로 나열되도록 마감 */
-  }
-
-  .contact-info-text p {
-    margin: 0 !important;
-  }
-}
-
-/* ==========================================================================
-   Project & Gaebap 공통 반응형 CSS (데스크톱 기본)
-   ========================================================================== */
-/* Project */
+/* Project 데스크톱 기본: 4열 정렬 */
 .project-section {
   padding: 100px 10%;
   background-color: #fff;
@@ -376,6 +217,29 @@ body {
 }
 .btn-github:hover {
   background-color: #6a5acd;
+}
+
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 데스크톱 한 줄에 4개 배치 */
+  gap: 20px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.img-card {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+}
+
+.media-content {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 /* Gaebap */
@@ -453,13 +317,6 @@ body {
   border: 1px solid #eee;
   background-color: #000;
 }
-.media-content {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  max-height: none;
-}
 .gaebap-divider {
   border: 0;
   height: 1px;
@@ -471,6 +328,58 @@ body {
    모바일 전용 반응형 레이아웃 (화면 너비 768px 이하 대응)
    ========================================================================== */
 @media (max-width: 768px) {
+  /* Profile 모바일 최적화 */
+  .profile-container {
+    flex-direction: column;
+    padding: 90px 20px 60px 20px;
+    gap: 30px;
+  }
+
+  .profile-image-area {
+    position: static;
+    width: 100%;
+  }
+
+  .image-frame {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    margin-top: 0;
+  }
+
+  .profile-text-area {
+    width: 100%;
+    padding: 0;
+  }
+
+  .about-me-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    align-self: center;
+  }
+
+  .profile-description {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .experience-skills-container {
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  /* 테이블 글자 크기 최적화 */
+  .cert-table {
+    font-size: 0.85rem;
+  }
+
+  .cert-table th,
+  .cert-table td {
+    padding: 8px 5px;
+  }
+
   /* Project 모바일 최적화 */
   .project-section {
     padding: 60px 20px;
@@ -492,8 +401,15 @@ body {
     width: 100%;
     display: block;
   }
-  .media-content {
-    max-height: 180px;
+
+  /* ★ 구조 수정: 모바일에서는 가로 스크롤 없이 아래로 순차 배치 */
+  .project-gallery {
+    grid-template-columns: 1fr !important;
+    gap: 25px !important;
+  }
+
+  .img-card {
+    width: 100% !important;
   }
 
   /* Gaebap 모바일 최적화 */
@@ -530,7 +446,10 @@ body {
     font-size: 0.95rem;
   }
   .media-content {
-    max-height: 240px;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
   }
   .gaebap-divider {
     margin: 40px 0;
@@ -538,13 +457,94 @@ body {
 }
 
 /* ==========================================================================
-   PDF 인쇄 전용 스타일 (@media print)
+   PDF 인쇄 및 내보내기 전용 스타일 (@media print)
    ========================================================================== */
 @media print {
-  /* ... (기존 설정 유지) ... */
-  /* PDF 출력 시 강제로 2열로 고정하여 모바일 세로 레이아웃 방지 */
+  html,
+  body {
+    width: 1200px !important;
+    min-width: 1200px !important;
+    background-color: #fff !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .header-container,
+  .hamburger-btn,
+  .nav-menu,
+  .gaebap-divider {
+    display: none !important;
+  }
+
+  .profile-container {
+    flex-direction: row !important;
+    min-height: auto !important;
+    padding: 40px !important;
+    gap: 50px !important;
+  }
+
+  .profile-image-area {
+    position: static !important;
+  }
+
+  .experience-skills-container {
+    flex-direction: row !important;
+    gap: 40px !important;
+  }
+
+  .project-gallery,
   .feature-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 30px !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important; /* 인쇄 시 4열 유지 */
+    gap: 15px !important;
+    width: 100% !important;
+    overflow: visible !important;
+    page-break-inside: avoid !important;
+  }
+
+  .img-card,
+  .feature-card {
+    flex: none !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    background-color: #fff !important;
+    page-break-inside: avoid !important;
+  }
+
+  #contact {
+    page-break-inside: avoid !important;
+    margin-top: auto !important;
+    padding: 20px 0 !important;
+    background-color: #fff !important;
+    border-top: 1px solid #eee !important;
+    width: 100% !important;
+  }
+
+  .contact-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 85% !important;
+    margin: 0 auto !important;
+  }
+
+  .contact-title {
+    font-size: 1.2rem !important;
+    margin-bottom: 0 !important;
+    color: #333 !important;
+  }
+
+  .contact-info-text {
+    font-size: 0.9rem !important;
+    color: #666 !important;
+    text-align: right !important;
+    display: flex !important;
+    gap: 20px !important;
+  }
+
+  .contact-info-text p {
+    margin: 0 !important;
   }
 }

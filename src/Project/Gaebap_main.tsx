@@ -20,10 +20,10 @@ const projects: ProjectItem[] = [
     details:
       "사용자의 질문에 AI가 최적화된 답변을 제공합니다. 비동기 처리를 통해 응답 대기 시간을 최적화하고 직관적인 인터페이스를 구현했습니다.",
     images: [
-      "https://res.cloudinary.com/dacgjblsv/image/upload/v1779091276/app_login_p0kdzx.png",
-      "https://res.cloudinary.com/dacgjblsv/image/upload/v1779091276/app_home_view_idmgvo.png",
-      "https://res.cloudinary.com/dacgjblsv/image/upload/v1779091276/app_log_uqozxv.png",
-      "https://res.cloudinary.com/dacgjblsv/image/upload/v1779091276/app_shop_ubahl7.png",
+      "https://res.cloudinary.com/dacgjblsv/image/upload/v1779167483/dogdog_intro1_dgwtqy.png",
+      "https://res.cloudinary.com/dacgjblsv/image/upload/v1779167484/dogdog_intro2_dus74o.png",
+      "https://res.cloudinary.com/dacgjblsv/image/upload/v1779167486/dogdog_intro3_at5kvn.png",
+      "https://res.cloudinary.com/dacgjblsv/image/upload/v1779167483/dogdog_intro4_rux2wb.png",
     ],
     link: "https://github.com/GBGB-PROJECT/DOGDOG/tree/main/dogdog_app_api_py",
   },
