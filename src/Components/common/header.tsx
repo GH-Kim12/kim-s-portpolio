@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-// 💡 철자 일관성을 위해 변수명을 portfolioPDF로 관리하는 것을 추천합니다.
+// 1. assets에 있는 PDF 파일을 정상적으로 import 합니다.
 import portpolioPDF from "../assets/kim_portpolio.pdf";
 
 const Header = () => {
@@ -27,55 +27,21 @@ const Header = () => {
   return (
     <>
       <style>{`
-        .nav-menu {
-          display: flex;
-          gap: 15px;
-          align-items: center;
-          transition: transform 0.3s ease-in-out;
-        }
-
+        .nav-menu { display: flex; gap: 15px; align-items: center; transition: transform 0.3s ease-in-out; }
         @media (max-width: 768px) {
           .nav-menu {
-            position: fixed;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 70px);
-            background-color: rgba(255, 255, 255, 0.98);
-            flex-direction: column;
-            padding-top: 40px;
-            gap: 10px;
-            transform: ${isMenuOpen ? "translateX(0)" : "translateX(100%)"};
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: fixed; top: 70px; left: 0; width: 100%; height: calc(100vh - 70px);
+            background-color: rgba(255, 255, 255, 0.98); flex-direction: column; padding-top: 40px; gap: 10px;
+            transform: ${isMenuOpen ? "translateX(0)" : "translateX(100%)"}; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
           }
-          .nav-button {
-            font-size: 1.2rem !important;
-            padding: 15px 0 !important;
-            width: 100% !important;
-            text-align: center !important;
-            color: #000 !important;
-          }
-          .download-link {
-            width: 80% !important;
-            margin-top: 20px !important;
-          }
-          .download-button {
-            width: 100% !important;
-          }
-          .hamburger-btn {
-            display: flex !important;
-          }
-          .header-title {
-            font-size: 1.2rem !important;
-          }
-          .header-container {
-            padding: 0 20px !important;
-          }
+          .nav-button { font-size: 1.2rem !important; padding: 15px 0 !important; width: 100% !important; text-align: center !important; color: #000 !important; }
+          .download-link { width: 80% !important; margin-top: 20px !important; }
+          .download-button { width: 100% !important; }
+          .hamburger-btn { display: flex !important; }
         }
       `}</style>
 
       <header
-        className="header-container"
         style={{
           position: "fixed",
           top: 0,
@@ -92,10 +58,7 @@ const Header = () => {
           boxSizing: "border-box",
         }}
       >
-        <div
-          className="header-title"
-          style={{ fontSize: "1.5rem", fontWeight: "900" }}
-        >
+        <div style={{ fontSize: "1.5rem", fontWeight: "900" }}>
           포트폴리오-김건형
         </div>
 
@@ -157,7 +120,7 @@ const Header = () => {
             Contact
           </button>
 
-          {/* ★ 수정: 쉼표 오타를 제거하고 변수를 href에 바인딩 */}
+          {/* 2. assets 내부 고정 파일을 온전하게 내려받는 순수 다운로드 링크 설정 */}
           <a
             href={portpolioPDF}
             download="포트폴리오_김건형.pdf"
@@ -193,11 +156,6 @@ const Header = () => {
             border: "none",
             fontSize: "1.6rem",
             cursor: "pointer",
-            padding: "0px",
-            width: "30px",
-            height: "30px",
-            alignItems: "center",
-            justifyContent: "center",
             zIndex: 1001,
           }}
         >
