@@ -8,12 +8,12 @@ const Profile = () => {
       grade: "1급",
       authority: "대한상공회의소",
     },
-    {
-      date: "2024.12",
-      name: "지게차운전기능사",
-      grade: "-",
-      authority: "한국산업인력공단",
-    },
+    // {
+    //   date: "2024.12",
+    //   name: "지게차운전기능사",
+    //   grade: "-",
+    //   authority: "한국산업인력공단",
+    // },
     {
       date: "2023.10",
       name: "K-Tour Idea Challenge",
